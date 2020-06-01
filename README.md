@@ -1,5 +1,5 @@
 # MultiboxMultiremote for Itho
-*Remote control for multiple Itho fans using IDs of (multiple) own physical remotes.
+*Remote control for multiple Itho fans using IDs of (multiple) own physical remotes.*
 
 Includes webinterface using Bootstrap and supports OTA upgrades, an API, MQTT and a DHT22 sensor. A CC1101 868Mhz transmitter is needed. The 433Mhz version also seems to work, but range may be limited and commands sent by physical remotes are not always detected.
 
@@ -60,9 +60,9 @@ I will post better instructions for this later in time.
 
 ### Control your Itho fans:
 There are three ways to control your Itho-fans:
-1) Using the webinterface on: http://<YOURIP>/.
-2) Using API-calls on: http://<YOURIP>/api/. Example commands: http://<YOURIP>/api?remote=xx:xx:xx&action=state&value=high to change state to high; http://<YOURIP>/api?action=reset&value=true to reset the device.
-3) Using Mqtt. Set the payload of the ITHO/<BOX>/Fan/Cmd topic to an appropiate state. I use this to control my Ithoboxes via HomeAssistant (see sample config below).
+1) Using the webinterface on: http://YOURIP/.
+2) Using API-calls on: http://YOURIP/api/. Example commands: http://<YOURIP>/api?remote=xx:xx:xx&action=state&value=high to change state to high; http://YOURIP/api?action=reset&value=true to reset the device.
+3) Using Mqtt. Set the payload of the ITHO/BOXNAME/Fan/Cmd topic to an appropiate state. I use this to control my Ithoboxes via HomeAssistant (see sample config below).
 
 ### Firmware OTA upgrades
 If you want to do an OTA upgrade of the firmware, go to the webinterface. Click on "System" and then "Switch off loops before OTA updates". Then again click on "System" and then "Update firmware OTA".
