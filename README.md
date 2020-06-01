@@ -69,7 +69,7 @@ If you want to do an OTA upgrade of the firmware, go to the webinterface. Click 
 
 ### Sample configuration for HomeAssistant
 This is the configuration I use for HomeAssistant in configuration.yaml. Example shown is for 1 box:
-
+```
 fan:
   - platform: mqtt
     command_topic: "ITHO/ITHO_1/Fan/Cmd"
@@ -116,3 +116,4 @@ fan:
     name: "Itho Humidity"
     state_topic: "ITHO/Humidity"
     unit_of_measurement: '%'
+```
