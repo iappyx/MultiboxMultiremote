@@ -61,7 +61,7 @@ I will post better instructions for this later in time.
 ### Control your Itho fans:
 There are three ways to control your Itho-fans:
 1) Using the webinterface on: http://YOURIP/.
-2) Using API-calls on: http://YOURIP/api/. Example commands: http://<YOURIP>/api?remote=xx:xx:xx&action=state&value=high to change state to high; http://YOURIP/api?action=reset&value=true to reset the device.
+2) Using API-calls on: http://YOURIP/api/. Example commands: http://YOURIP/api?remote=xx:xx:xx&action=state&value=high to change state to high; http://YOURIP/api?action=reset&value=true to reset the device.
 3) Using Mqtt. Set the payload of the ITHO/BOXNAME/Fan/Cmd topic to an appropiate state. I use this to control my Ithoboxes via HomeAssistant (see sample config below).
 
 ### Firmware OTA upgrades
