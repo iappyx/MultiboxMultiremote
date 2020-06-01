@@ -74,7 +74,7 @@ String IthoDecode::decode(uint8_t *data, uint8_t length)
             b3.set(i * 4 + j, b2.get(i * 5 + (3 - j)));
         }
     }
-    
+
     String rs = b3.toStringRaw();
     //String ps = toPrintString(rs);
     //Serial.print("str convert :");

@@ -1,5 +1,6 @@
 #include <Arduino.h>
 
+/* Old class, kept for reference
 class RemoteCommand
 {
     public:
@@ -7,7 +8,19 @@ class RemoteCommand
         const uint8_t* bytes;
         const uint8_t length;
 };
+*/
 
+class RemoteCommandExtended
+{
+public:
+	const char *name;
+	const char *friendly_name;
+	const int timer; //in minutes
+	const uint8_t *bytes;
+	const uint8_t length;
+};
+
+/* We don't need this, kept for reference.
 RemoteCommand commands[] = {
     { "eco", (uint8_t[])    { 0x22, 0xf8, 0x03, 0x00, 0x01, 0x02 }, 6},
     { "comfort", (uint8_t[]){ 0x22, 0xf8, 0x03, 0x00, 0x02, 0x02 }, 6 },
@@ -33,6 +46,6 @@ RemoteCommand commandsRoom[] = {
     { "leave",   (uint8_t[]) { 0x1f, 0xc9, 0x06, 0x63, 0x1f, 0xc9, 0x74, 0xf3, 0xaf }, 9}, // this is for id: 0x74, 0xf3, 0xaf
     { NULL, NULL, 0}
 };
-
+*/
 
 const uint8_t joinBytes[] =    {0x1f, 0xc9, 0x0c, 0x00, 0x22, 0xf8, 0x52, 0x50, 0xb9, 0x00, 0x10, 0xe0, 0x52, 0x50, 0xb9};

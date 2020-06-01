@@ -20,9 +20,10 @@ class IthoReceiveClass
 	bool printDebug = false;
 
   void logger(void (*)(const String &));
+  uint8_t _irqPin = 5;
 
   private:
-	uint8_t _irqPin = D2;
+
 	bool _gotIthoStart;
 	uint8_t _lastIndex;
 	size_t _oldSize = 0;

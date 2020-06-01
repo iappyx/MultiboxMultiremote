@@ -7,25 +7,27 @@
 
 #include "RemoteCommand.h"
 
-
+/*
 void IthoSenderClass::sendCommand(const String& sender, const String &c)
 {
-    Serial.print("send command: ");
-    Serial.println(c);
-    //_log(String("send/") + c);
-    const RemoteCommand* remoteCommand = _lookupByName(c, commands);
+    //_log(String("send command: "));
+    //_log(String(c));
+    //Serial.print("send command: ");
+    //Serial.println(c);
+    _log(String("send/") + c);
+    const RemoteCommandExtended* remoteCommand = _lookupByName(c, commands);
     if (remoteCommand == NULL) return;
     _send(sender, _remoteId, remoteCommand);
 }
 
 void IthoSenderClass::sendCommandRoom(const String &c)
 {
-    Serial.print("send command room: ");
-    Serial.println(c);
-    _log(String("sendRoom/") + c);
-    const RemoteCommand* remoteCommand = _lookupByName(c, commandsRoom);
+    //Serial.print("send command room: ");
+    //Serial.println(c);
+    //_log(String("sendRoom/") + c);
+    const RemoteCommandExtended* remoteCommand = _lookupByName(c, commandsRoom);
     if (remoteCommand == NULL) return;
-    _send("oldWebInterface", _remoteIdRoom, remoteCommand);
+   _send("web", _remoteIdRoom, remoteCommand);
 }
 
 void IthoSenderClass::sendCommand(const String& sender, const String &remote, const String& remoteCommand)
@@ -34,17 +36,18 @@ void IthoSenderClass::sendCommand(const String& sender, const String &remote, co
     ByteArray id(remote);
     ByteArray cc(remoteCommand);
     String ss = id.toString();
-    //_log(String("ByteArrays id=") + ss);
+    _log(String("ByteArrays id=") + ss);
     _send(sender, id, cc);
 }
+*/
 
-void IthoSenderClass::_send(const String& sender, uint8_t remoteId[], const RemoteCommand* remoteCommand)
+void IthoSenderClass::_send(const String& sender, uint8_t remoteId[], RemoteCommandExtended remoteCommand)
 {
     //_log(String("send/from/") + _remoteId + "/" + )
 
     unsigned int comLength = 0;
-    const uint8_t* comBytes = remoteCommand->bytes;
-    comLength = remoteCommand->length;
+    const uint8_t* comBytes = remoteCommand.bytes;
+    comLength = remoteCommand.length;
 
     ByteArray id(remoteId, 3);
     ByteArray cc(comBytes, comLength);
@@ -55,17 +58,23 @@ void IthoSenderClass::_send(const String& sender, uint8_t remoteId[], const Remo
 
 void IthoSenderClass::_send(const String& sender, ByteArray id, ByteArray cc)
 {
-    _log(String("send/") + sender + "/" + id.toString() + "/" + cc.toString());
+    _log(String("send/") + sender + "/" + id.toString() + "/" + cc.toString() + " ");
 
     IthoCommand cmd(_remoteByte0, id, _counter, cc);
     String ps = cmd.toString();
-    Serial.print("send cmd: ");
-    Serial.println(ps);
+
+    //_log(String("send cmd: "));
+    _log(String(ps));
+    //Serial.print("send cmd: ");
+    //Serial.println(ps);
 
     ByteArray cmdEncoded = IthoDecode::encode(cmd);
 
-    Serial.print("send encoded: ");
-    Serial.println(cmdEncoded.toString());
+    //_log(String("send encoded: "));
+    _log(String(cmdEncoded.toString()));
+    //Serial.print("send encoded: ");
+    //Serial.println(cmdEncoded.toString());
+
     CC1101Packet p;
     _convertToPacket(cmdEncoded, p);
     IthoCC1101.sendCommand(p);
@@ -85,6 +94,7 @@ void IthoSenderClass::_convertToPacket(const ByteArray &a, CC1101Packet &p)
     }
 }
 
+/*
 void IthoSenderClass::remoteId(const uint8_t* id)
 {
     for (size_t i = 0; i < 3; i++)
@@ -100,6 +110,7 @@ void IthoSenderClass::remoteIdRoom(const uint8_t* id)
         _remoteIdRoom[i] = id[i];
     }
 }
+*/
 
 void IthoSenderClass::logger(void (*callback) (const String&))
 {
@@ -108,13 +119,14 @@ void IthoSenderClass::logger(void (*callback) (const String&))
 
 void IthoSenderClass::_log(const String &s)
 {
-    Serial.println(String("IthoSenderClass::_log ") + s);
+    //Serial.println(String("IthoSenderClass::_log ") + s);
     if (_logger != NULL) {
         _logger(s);
     }
 }
 
-const RemoteCommand* IthoSenderClass::_lookupByName(const String& c, const RemoteCommand commands[])
+/*
+const RemoteCommandExtended* IthoSenderClass::_lookupByName(const String& c, RemoteCommandExtended commands[])
 {
     size_t i;
     for (i = 0; c != commands[i].name; i++)
@@ -133,5 +145,6 @@ const RemoteCommand* IthoSenderClass::_lookupByName(const String& c, const Remot
     }
     return &(commands[i]);
 }
+*/
 
 IthoSenderClass IthoSender;

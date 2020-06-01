@@ -1,18 +1,18 @@
 #include "IthoCC1101.h"
 
-class RemoteCommand;
+class RemoteCommandExtended;
 
 class IthoSenderClass
 {
   public:
-    void turnOff(const String& sender) { sendCommand(sender, "eco"); }
-    void turnOn(const String& sender) { sendCommand(sender, "cook1"); }
+//    void turnOff(const String& sender) { sendCommand(sender, "eco"); }
+//    void turnOn(const String& sender) { sendCommand(sender, "cook1"); }
 
-    void sendCommand(const String& sender, const String &c);
-    void sendCommandRoom(const String &c);
-    void sendCommand(const String& sender, const String &remote, const String& remoteCommand);
-    void remoteId(const uint8_t *);
-    void remoteIdRoom(const uint8_t *);
+//  void sendCommand(const String& sender, const String &c);
+//  void sendCommandRoom(const String &c);
+//  void sendCommand(const String& sender, const String &remote, const String& remoteCommand);
+//  void remoteId(const uint8_t *);
+//  void remoteIdRoom(const uint8_t *);
 
     void logger(void (*)(const String &));
 
@@ -22,13 +22,13 @@ class IthoSenderClass
     public:
     void _log(const String &s);
 
-    const RemoteCommand *_lookupByName(const String &n, const RemoteCommand commands[]);
-    void _send(const String& sender, uint8_t id[], const RemoteCommand *remoteCommand);
+    RemoteCommandExtended *_lookupByName(const String &n, const RemoteCommandExtended commands[]);
+    void _send(const String& sender, uint8_t id[], RemoteCommandExtended remoteCommand);
     void _send(const String& sender, ByteArray id, ByteArray cc);
 
     uint8_t _counter = 87;
-    uint8_t _remoteId[3] = {0x52, 0x50, 0xb9};
-    uint8_t _remoteIdRoom[3] = {0x0, 0x0, 0x9};
+//  uint8_t _remoteId[3] = {0x52, 0x50, 0xb9};
+//  uint8_t _remoteIdRoom[3] = {0x00, 0x00, 0x00}; // We overwrite this later
     uint8_t _remoteByte0 = 0x16;
 };
 

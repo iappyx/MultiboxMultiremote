@@ -30,7 +30,7 @@ inline void CC1101::deselect(void) {
 
 void CC1101::spi_waitMiso()
 {
-    while(digitalRead(MISO) == HIGH) yield();
+    while(digitalRead(MISO) == HIGH) delay(0); //yield();
 }
 
 void CC1101::init()
@@ -227,7 +227,7 @@ uint8_t CC1101::receiveDataRaw(uint8_t *data, size_t lengthMax)
 	if (rxBytes > 0) rxBytes -= 1;
 	
 	if (rxBytes > lengthMax) {
-		printf("rd: detect buffer overflow %d %d\n", rxBytes, lengthMax);
+		//printf("rd: detect buffer overflow %d %d\n", rxBytes, lengthMax);
 		//rxBytes = lengthMax;
 		writeCommand(CC1101_SIDLE); //idle
 		return 0;
@@ -235,7 +235,7 @@ uint8_t CC1101::receiveDataRaw(uint8_t *data, size_t lengthMax)
 	//check for rx fifo overflow
 	if ((readRegisterWithSyncProblem(CC1101_MARCSTATE, CC1101_STATUS_REGISTER) & CC1101_BITS_MARCSTATE) == CC1101_MARCSTATE_RXFIFO_OVERFLOW)
 	{
-		printf("detected fifo overflow\n");
+		//printf("detected fifo overflow\n");
 	}
 	readBurstRegister(data, CC1101_RXFIFO, rxBytes);
 	return rxBytes;

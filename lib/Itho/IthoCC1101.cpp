@@ -164,7 +164,8 @@ void IthoCC1101Class::initReceive()
 	//wait for calibration to finish
 	int cnt = 0;
 	while ((readRegisterWithSyncProblem(CC1101_MARCSTATE, CC1101_STATUS_REGISTER)) != CC1101_MARCSTATE_IDLE) {
-		yield();
+		//yield();
+		delay(0);
 		if (cnt++ > 100) {
 			Serial.println("IthoCC1101Class::initReceive error in init");
 			return;
@@ -212,7 +213,7 @@ void IthoCC1101Class::initReceive()
 	writeCommand(CC1101_SCAL);
 
 	//wait for calibration to finish
-	while ((readRegisterWithSyncProblem(CC1101_MARCSTATE, CC1101_STATUS_REGISTER)) != CC1101_MARCSTATE_IDLE) yield();
+	while ((readRegisterWithSyncProblem(CC1101_MARCSTATE, CC1101_STATUS_REGISTER)) != CC1101_MARCSTATE_IDLE) delay(0); //yield();
 
 	writeRegister(CC1101_MCSM0 ,0x18);			//no auto calibrate
 	
@@ -224,7 +225,7 @@ void IthoCC1101Class::initReceive()
 
 	writeCommand(CC1101_SRX);
 	
-	while ((readRegisterWithSyncProblem(CC1101_MARCSTATE, CC1101_STATUS_REGISTER)) != CC1101_MARCSTATE_RX) yield();
+	while ((readRegisterWithSyncProblem(CC1101_MARCSTATE, CC1101_STATUS_REGISTER)) != CC1101_MARCSTATE_RX) delay(0); //yield();
 
 	initReceiveMessage();
 }
