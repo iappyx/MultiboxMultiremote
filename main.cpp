@@ -75,6 +75,7 @@ void showHomepage()
 		HTML += "<a class='dropdown-item' href='/api?action=toggleOnOff&value=true'>Switch on loops</a><a class='dropdown-item' href='/api?action=reset&value=true'>Reboot device</a> <a class='dropdown-item' href='/update'>Update firmware OTA</a>";
 	}
 
+	HTML +="<a class='dropdown-item' href='	https://github.com/iappyx/MultiboxMultiremote'>MultiboxMultiremote on GitHub</a>";
 	HTML += "</div></li></ul> </div></nav> <nav aria-label='breadcrumb'> <ol class='breadcrumb'> <li class='breadcrumb-item' aria-current='page'>Home</li><li class='breadcrumb-item active' aria-current='page'>Status</li></ol> </nav> <div class='col-md-12'>&nbsp; </div><div class='row'> <div class='col-md-6'>";
 
 	HTML += "<table class='table table-hover table-sm border'><tbody>";
