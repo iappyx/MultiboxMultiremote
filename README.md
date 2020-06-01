@@ -1,7 +1,7 @@
 # MultiboxMultiremote for Itho
 *Remote control for multiple Itho fans using IDs of (multiple) own physical remotes.
 
-Includes webinterface using Bootstrap and supports OTA upgrades, an API, MQTT and a DHT22 sensor. A CC1101 868Mhz transmitter is needed. The 433Mhz version also seems to work (range may be limited).
+Includes webinterface using Bootstrap and supports OTA upgrades, an API, MQTT and a DHT22 sensor. A CC1101 868Mhz transmitter is needed. The 433Mhz version also seems to work, but range may be limited and commands sent by physical remotes are not always detected.
 
 Using a modified version of the ITHORadio library (included) from https://github.com/philipsen/IthoRadio. In turn that ITHORadio library is originally based on the library from https://github.com/supersjimmie/IthoEcoFanRFT/tree/master/Master/Itho made by 'supersjimmie' and 'klusjesman'. 
 
