@@ -13,7 +13,6 @@ ByteArray::ByteArray(const BitArray &a)
     }
 }
 
-
 ByteArray::ByteArray(const String& value)
 {
     _data = 0;
