@@ -18,6 +18,8 @@
    ║ Name   ║ Date      ║ Description                                                                                  ║
    ╠════════╬═══════════╬══════════════════════════════════════════════════════════════════════════════════════════════╣
    ║ Iappyx ║ 31-5-2020 ║ Initial public release (v1.0)                                                                ║
+   ╠════════╬═══════════╬══════════════════════════════════════════════════════════════════════════════════════════════╣
+   ║ Iappyx ║  6-6-2020 ║ Minor updates (v1.01)                                                                        ║
    ╚════════╩═══════════╩══════════════════════════════════════════════════════════════════════════════════════════════╝
    ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
    ║ Documentation available on https://github.com/iappyx/MultiboxMultiremote                                          ║
@@ -57,13 +59,13 @@ void readDHT()
 
 void showHomepage()
 {
-
 	delay(200);
 
 	String Version = "1.0";
 	String HTML = "<!DOCTYPE html><html lang='en'><head> <meta charset='utf-8'> <meta http-equiv='X-UA-Compatible' content='IE=edge'> <meta name='viewport' content='width=device-width, initial-scale=1'>";
-	HTML += "<script>function convertFromMillis( milliseconds ) { var day, hour, minute, seconds; seconds = Math.floor(milliseconds / 1000); minute = Math.floor(seconds / 60); seconds = seconds % 60; hour = Math.floor(minute / 60); minute = minute % 60; day = Math.floor(hour / 24); hour = hour % 24; return { day: day, hour: hour, minute: minute, seconds: seconds };}</script>";
+	HTML += "<script>function convertFromMillis(milliseconds) { var day, hour, minute, seconds; seconds = Math.floor(milliseconds / 1000); minute = Math.floor(seconds / 60); seconds = seconds % 60; hour = Math.floor(minute / 60); minute = minute % 60; day = Math.floor(hour / 24); hour = hour % 24; return { day: day, hour: hour, minute: minute, seconds: seconds };}</script>";
 	HTML += "<title>MultiboxMultiremote for Itho</title> <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous'></head><body> <div class='container-fluid'> <div class='row'> <div class='col-md-2'> </div><div class='col-md-8'> <nav class='navbar navbar-expand-lg navbar-dark bg-dark'> <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'> <span class='navbar-toggler-icon'></span> </button> <a class='navbar-brand' href='#'>MultiboxMultiremote for Itho</a>";
+	HTML += "<script src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'></script> <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script> <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' crossorigin='anonymous'></script>";
 	HTML += "<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'> <ul class='navbar-nav'> <li class='nav-item dropdown'> <a class='nav-link dropdown-toggle' href='#' id='navbarDropdownMenuLink' data-toggle='dropdown'>System</a> <div class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>";
 
 	if (loopLoop)
@@ -75,16 +77,15 @@ void showHomepage()
 		HTML += "<a class='dropdown-item' href='/api?action=toggleOnOff&value=true'>Switch on loops</a><a class='dropdown-item' href='/api?action=reset&value=true'>Reboot device</a> <a class='dropdown-item' href='/update'>Update firmware OTA</a>";
 	}
 
-	HTML +="<a class='dropdown-item' href='	https://github.com/iappyx/MultiboxMultiremote'>MultiboxMultiremote on GitHub</a>";
+	HTML += "<a class='dropdown-item' href='https://github.com/iappyx/MultiboxMultiremote'>MultiboxMultiremote on GitHub</a>";
 	HTML += "</div></li></ul> </div></nav> <nav aria-label='breadcrumb'> <ol class='breadcrumb'> <li class='breadcrumb-item' aria-current='page'>Home</li><li class='breadcrumb-item active' aria-current='page'>Status</li></ol> </nav> <div class='col-md-12'>&nbsp; </div><div class='row'> <div class='col-md-6'>";
-
 	HTML += "<table class='table table-hover table-sm border'><tbody>";
 	HTML += "<tr><th scope='row'> IP Address </th><td>" + WiFi.localIP().toString() + "</td></tr>";
 	HTML += "<tr><th scope='row'> Client name </th><td>" + String(host) + "</td></tr>";
 	HTML += "<tr><th scope='row'> Version </th><td>" + Version + "</td></tr>";
 
 	// Let's format uptime on the client-side
-	HTML += "<tr><th scope='row'> Uptime </th><td><script> var uptime =  convertFromMillis(" + String(millis()) + "); document.write(uptime.day + ' day(s) ' + uptime.hour + ' hours ' + uptime.minute +' min ' + uptime.seconds + ' sec '); </script></td></tr>";
+	HTML += "<tr><th scope='row'> Uptime </th><td><script> var uptime = convertFromMillis(" + String(millis()) + "); document.write(uptime.day + ' day(s) ' + uptime.hour + ' hours ' + uptime.minute +' min ' + uptime.seconds + ' sec '); </script></td></tr>";
 
 	if (dhtEnabled == 1)
 	{
@@ -93,7 +94,6 @@ void showHomepage()
 	}
 
 	HTML += "</tbody></table>";
-
 	HTML += "<div class='col-md-12'>&nbsp; </div></div><div class='col-md-6'>";
 
 	if (loopLoop)
@@ -104,8 +104,8 @@ void showHomepage()
 			if (boxesAndRemotes[i].timer > 0)
 			{
 				HTML += "<div class='card'> <div class='card-body'> <h5 class='card-title'>" + String(boxesAndRemotes[i].friendly_name) + "</h5>";
-
-				HTML += "<div class='progress'><div class='progress-bar' role='progressbar' style='width:" + String((float)boxesAndRemotes[i].timer / (float)boxesAndRemotes[i].timer_full * 100) + "%' aria-valuenow='" + String(boxesAndRemotes[i].timer) + "' aria-valuemin='0' aria-valuemax='" + String(boxesAndRemotes[i].timer_full) + "'>" + String(boxesAndRemotes[i].timer) + " sec. remaining</div></div><div class='col-md-12'>&nbsp; </div>";
+				HTML += "<div class='progress'><div id='progress-bar-" + String(char('a' + (char)i)) + "' class='progress-bar' role='progressbar' style='width:" + String((float)boxesAndRemotes[i].timer / (float)boxesAndRemotes[i].timer_full * 100) + "%' aria-valuenow='" + String(boxesAndRemotes[i].timer) + "' aria-valuemin='0' aria-valuemax='" + String(boxesAndRemotes[i].timer_full) + "'>" + String(boxesAndRemotes[i].timer) + " sec. remaining</div></div><div class='col-md-12'>&nbsp; </div>";
+				HTML += "<script type='text/javascript'>var " + String(char('a' + (char)i)) + " = " + String(boxesAndRemotes[i].timer) + "; var progressBar" + String(char('a' + (char)i)) + " = $('#progress-bar-" + String(char('a' + (char)i)) + "'); function reduce" + String(char('a' + (char)i)) + "Bar(){ if(" + String(char('a' + (char)i)) + " > 0){ " + String(char('a' + (char)i)) + " = " + String(char('a' + (char)i)) + " - 1; progressBar" + String(char('a' + (char)i)) + ".css('width', ((" + String(char('a' + (char)i)) + "/" + String(boxesAndRemotes[i].timer_full) + ")*100) + '%').text(" + String(char('a' + (char)i)) + "+ ' sec. remaining'); } setTimeout('reduce" + String(char('a' + (char)i)) + "Bar()', 1000);} reduce" + String(char('a' + (char)i)) + "Bar(); </script>";
 			}
 			else
 			{
@@ -132,13 +132,12 @@ void showHomepage()
 				}
 				HTML += "</nav><div class='col-md-12'>&nbsp; </div>";
 			}
-
 			HTML += "</div></div><div class='col-md-12'>&nbsp;</div>";
 		}
 	}
 
 	HTML += "</div></div></div><div class='col-md-2'> </div></div></div>";
-	HTML += "<script src='https://code.jquery.com/jquery-3.5.1.slim.min.js' integrity='sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj' crossorigin='anonymous'></script> <script src='https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js' integrity='sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo' crossorigin='anonymous'></script> <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js' integrity='sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI' crossorigin='anonymous'></script></body></html>";
+	HTML += "</body></html>";
 
 	httpServer.send(200, "text/html", HTML);
 }
@@ -185,7 +184,11 @@ void processAPI()
 
 		if (configLog)
 		{
-			Serial.println(String("Command '" + value + "' sent to box #" + String(boxId + 1) + " (" + boxName + ") with remote #" + remoteId + " (" + remote + ")."));
+			if (serialLog)
+			{
+				Serial.println(String("Command '" + value + "' sent to box #" + String(boxId + 1) + " (" + boxName + ") with remote #" + remoteId + " (" + remote + ")."));
+			}
+
 			mqttClient.publish(mqttLogTopic, String("Command '" + value + "' sent to box #" + String(boxId + 1) + " (" + boxName + ") with remote #" + remoteId + " (" + remote + ").").c_str());
 		}
 
@@ -205,7 +208,10 @@ void processAPI()
 
 			if (configLog)
 			{
-				Serial.println("State is going from " + oldValue + " -> " + value);
+				if (serialLog)
+				{
+					Serial.println("State is going from " + oldValue + " -> " + value);
+				}
 				mqttClient.publish(mqttLogTopic, String("State is going from " + oldValue + " -> " + value).c_str());
 			}
 
@@ -226,7 +232,7 @@ void processAPI()
 	}
 	else
 	{
-		if (configLog)
+		if ((configLog) && (serialLog))
 		{
 			Serial.println("ERROR: Unknown remote, values or action.");
 		}
@@ -243,20 +249,25 @@ void processReceivedCommand(const String &m)
 {
 	if (configLog)
 	{
-		Serial.println(m);
+		if (serialLog)
+		{
+			Serial.println(m);
+		}
 		mqttClient.publish(mqttLogTopic, String(m).c_str());
 	}
 
 	if (m.startsWith("send/remote/"))
 	{
-
 		const String &receivedRemote = returnSubString(m, '/', 2);
 		const String &receivedCommand = returnSubString(m, '/', 3);
 
 		if (configLog)
 		{
-			Serial.println(String("Copy this command --> " + receivedCommand));
-			Serial.println(String("Copy this remote  --> " + receivedRemote));
+			if (serialLog)
+			{
+				Serial.println(String("Copy this command --> " + receivedCommand));
+				Serial.println(String("Copy this remote  --> " + receivedRemote));
+			}
 			mqttClient.publish(mqttLogTopic, String("Copy this command --> " + receivedCommand).c_str());
 			mqttClient.publish(mqttLogTopic, String("Copy this remote  --> " + receivedRemote).c_str());
 		}
@@ -264,8 +275,6 @@ void processReceivedCommand(const String &m)
 
 		if (boxId > -1)
 		{
-			//Serial.println(boxId);
-
 			String boxName = boxesAndRemotes[boxId].name;
 			String commandName = returnCommandNameByBoxAndCommand(boxId, receivedCommand);
 			String oldValue = String(boxesAndRemotes[boxId].state);
@@ -284,7 +293,10 @@ void processReceivedCommand(const String &m)
 
 			if (configLog)
 			{
-				Serial.println("State is going from " + oldValue + " -> " + commandName);
+				if (serialLog)
+				{
+					Serial.println("State is going from " + oldValue + " -> " + commandName);
+				}
 				mqttClient.publish(mqttLogTopic, String("State is going from " + oldValue + " -> " + commandName).c_str());
 			}
 			mqttClient.publish(mqttTopics[boxId].State, commandName.c_str());
@@ -296,7 +308,10 @@ void processReceivedCommand(const String &m)
 		{
 			if (configLog)
 			{
-				Serial.println("This remote is not yet configured");
+				if (serialLog)
+				{
+					Serial.println("This remote is not yet configured");
+				}
 				mqttClient.publish(mqttLogTopic, String("This remote is not yet configured").c_str());
 			}
 		}
@@ -330,7 +345,10 @@ void mqttCallback(char *topic, byte *payload, unsigned int length)
 
 			if (configLog)
 			{
-				Serial.println(String("Command '" + value + "' sent to box #" + boxId + " (" + boxName + ") with remote #" + remoteId + " (" + remote + ")."));
+				if (serialLog)
+				{
+					Serial.println(String("Command '" + value + "' sent to box #" + boxId + " (" + boxName + ") with remote #" + remoteId + " (" + remote + ")."));
+				}
 				mqttClient.publish(mqttLogTopic, String("Command '" + value + "' sent to box #" + boxId + " (" + boxName + ") with remote #" + remoteId + " (" + remote + ").").c_str());
 			}
 
@@ -343,7 +361,10 @@ void mqttCallback(char *topic, byte *payload, unsigned int length)
 			{
 				String newOldState = String(boxesAndRemotes[returnBoxIDByRemote(remote)].oldstate);
 				String newState = String(boxesAndRemotes[returnBoxIDByRemote(remote)].state);
-				Serial.println("State is going from " + newOldState + " -> " + newState);
+				if (serialLog)
+				{
+					Serial.println("State is going from " + newOldState + " -> " + newState);
+				}
 				mqttClient.publish(mqttLogTopic, String("State is going from " + newOldState + " -> " + newState).c_str());
 			}
 
@@ -376,14 +397,17 @@ void mqttReconnect()
 		}
 		else
 		{
-			delay(4000); 
+			delay(4000);
 		}
 	}
 }
 
 void setup(void)
 {
-	Serial.begin(115200);
+	if (serialLog)
+	{
+		Serial.begin(115200);
+	}
 
 	WiFi.mode(WIFI_OFF);
 
@@ -405,8 +429,8 @@ void setup(void)
 	MDNS.addService("http", "tcp", 80);
 
 	IthoReceive.setInterruptPin(IRQ_pin);
-	IthoReceive.printAllPacket = true;
-	IthoReceive.printNonRemote = true;
+	IthoReceive.printAllPacket = logAllPacket;
+	IthoReceive.printNonRemote = logNonRemote;
 	IthoReceive.logger(processReceivedCommand);
 	IthoSender.logger(processReceivedCommand);
 	IthoReceive.setup();
@@ -454,7 +478,7 @@ void loop(void)
 	if (loopLoop)
 	{
 		IthoReceive.loop();
-		delay(0);
+		//delay(0);
 
 		if (WiFi.status() == WL_CONNECTED)
 		{
@@ -468,7 +492,7 @@ void loop(void)
 					mqttReconnect();
 				}
 
-				delay(0);
+				//delay(0);
 
 				for (int i = 0; i < numberOfIthoBoxes; i++)
 				{
@@ -501,7 +525,6 @@ void loop(void)
 			{
 				for (int i = 0; i < numberOfIthoBoxes; i++)
 				{
-
 					char timerTimer[5];
 					itoa(boxesAndRemotes[i].timer, timerTimer, 10);
 					mqttClient.publish(mqttTopics[i].Timer, timerTimer);
