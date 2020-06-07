@@ -6,7 +6,7 @@
 #define CONFIG_MQTT_IP 192, 168, 2, 5 // Only IPAdresses allowed, in format xxx, xxx, xxx, xxx
 #define CONFIG_MQTT_USER "<USER>"
 #define CONFIG_MQTT_PASS "<PASS>"
-#define CONFIG_MQTT_CLIENTID "ITHOREMOTEV10" // Must be unique on the MQTT network
+#define CONFIG_MQTT_CLIENTID "ITHOREMOTEV101" // Must be unique on the MQTT network
 
 #define CONFIG_CC1101_PIN 5
 #define CONFIG_NUMBEROFITHOBOXES 2 // We avoid dynamically calculating this, to speed up the loops, configure boxes and remotes in config_boxes_and_remotes.h
@@ -19,6 +19,11 @@
 #define CONFIG_DHT_PIN 4
 #define CONFIG_DHT_TYPE DHT22
 #define DHTTYPE CONFIG_DHT_TYPE
+
+#define CONFIG_LOG true
+#define CONFIG_LOG_SERIAL false
+#define CONFIG_LOG_ALL_PACKET false
+#define CONFIG_LOG_NON_REMOTE false
 
 #define CONFIG_MQTTMAINTOPIC "ITHO/"
 #define CONFIG_MQTTSTATUSTOPIC "ITHO/Status"
@@ -45,9 +50,12 @@ const char *host = CONFIG_HOST;
 const char *ssid = CONFIG_SSID;
 const char *password = CONFIG_PSK;
 int8_t IRQ_pin = CONFIG_CC1101_PIN;
-bool configLog = true;
+bool configLog = CONFIG_LOG;
+bool serialLog = CONFIG_LOG_SERIAL;
 bool loopLoop = true;
 bool firstRun = true;
+bool logAllPacket = CONFIG_LOG_ALL_PACKET;
+bool logNonRemote = CONFIG_LOG_NON_REMOTE;
 static unsigned long lastRefreshTime = 0;
 static unsigned long lastRefreshTimeDHT = 0;
 
