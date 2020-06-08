@@ -20,6 +20,8 @@
    ║ Iappyx ║ 31-5-2020 ║ Initial public release (v1.0)                                                                ║
    ╠════════╬═══════════╬══════════════════════════════════════════════════════════════════════════════════════════════╣
    ║ Iappyx ║  6-6-2020 ║ Minor updates (v1.01)                                                                        ║
+   ╠════════╬═══════════╬══════════════════════════════════════════════════════════════════════════════════════════════╣
+   ║ Iappyx ║  8-6-2020 ║ Bugs with some remotes and timers resolved (v1.02)                                           ║
    ╚════════╩═══════════╩══════════════════════════════════════════════════════════════════════════════════════════════╝
    ╔═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
    ║ Documentation available on https://github.com/iappyx/MultiboxMultiremote                                          ║
@@ -61,7 +63,7 @@ void showHomepage()
 {
 	delay(200);
 
-	String Version = "1.0";
+	String Version = "1.02";
 	String HTML = "<!DOCTYPE html><html lang='en'><head> <meta charset='utf-8'> <meta http-equiv='X-UA-Compatible' content='IE=edge'> <meta name='viewport' content='width=device-width, initial-scale=1'>";
 	HTML += "<script>function convertFromMillis(milliseconds) { var day, hour, minute, seconds; seconds = Math.floor(milliseconds / 1000); minute = Math.floor(seconds / 60); seconds = seconds % 60; hour = Math.floor(minute / 60); minute = minute % 60; day = Math.floor(hour / 24); hour = hour % 24; return { day: day, hour: hour, minute: minute, seconds: seconds };}</script>";
 	HTML += "<title>MultiboxMultiremote for Itho</title> <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css' integrity='sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk' crossorigin='anonymous'></head><body> <div class='container-fluid'> <div class='row'> <div class='col-md-2'> </div><div class='col-md-8'> <nav class='navbar navbar-expand-lg navbar-dark bg-dark'> <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#bs-example-navbar-collapse-1'> <span class='navbar-toggler-icon'></span> </button> <a class='navbar-brand' href='#'>MultiboxMultiremote for Itho</a>";
@@ -278,7 +280,7 @@ void processReceivedCommand(const String &m)
 			String boxName = boxesAndRemotes[boxId].name;
 			String commandName = returnCommandNameByBoxAndCommand(boxId, receivedCommand);
 			String oldValue = String(boxesAndRemotes[boxId].state);
-			int commandTimer = returnTimerByRemoteAndCommand(commandName, receivedCommand);
+			int commandTimer = returnTimerByRemoteAndCommand(receivedRemote, commandName) * 60;
 
 			if (configLog)
 			{
