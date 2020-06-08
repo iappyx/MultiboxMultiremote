@@ -91,10 +91,11 @@ String RemoteCommandsToString(uint8_t *data, unsigned int length, bool ashex = t
 	{
 		if (ashex)
 		{
-			if (data[i] == 0)
-			{
-				str += "0";
-			}
+		//  This is not needed
+		//	if (data[i] == 0)
+		//	{
+		//		str += "0";
+		//	}
 			str += String(data[i], HEX);
 		}
 		else
