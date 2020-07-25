@@ -46,7 +46,7 @@ The set-up is a multi-step process:
 
 #### Phase 3 - Configure the remote IDs and command IDs in the software
 8) Configure CONFIG_NUMBEROFITHOBOXES (number of Ithoboxes you have) and CONFIG_MAXREMOTESPERBOX (maximum number of remotes you have per Ithobox) in *config.h*
-8) Change any other settinfs in *config.h* if appropriate
+8) Change any other settings in *config.h* if appropriate
 9) Open *config_boxes_and_remotes.h* and configure the remote IDs and command IDs you sniffed in step 6. Make sure the Itho-boxes object (boxesAndRemotes[]) is correct. How the object is meant to be set-up is described in the object definition in config.h (line #76 to #105). Use the filled in data as an example. Please note that remoteIDs should be entered as as string (xx:xx:xx) and commands as bytes. You can remove unused remotes, or replace them with NULL-values. For privacy reasons my remote IDs are shown as 00:00:00 in the example.
 
 Please note, you should at least set:
@@ -56,7 +56,7 @@ Please note, you should at least set:
 
 I will post better instructions for this later in time.
 
-10) Build the firmware and upload it to your device
+10) If everything works, disable all logging in config.h. Build the firmware and upload it to your device
 
 ### Control your Itho fans:
 There are three ways to control your Itho-fans:
